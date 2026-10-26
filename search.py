@@ -271,3 +271,31 @@ class GPSProblem(Problem):
             return infinity
 
 
+"""
+hace lo mismo que GPSProblem solo que
+el constructor pone los contadores, generados empieza en 1 porque el nodo inicial ya es un nodo creado
+
+successor pide los sucesores al metodo original (GPSProblem) y suma cuantos son
+Node.expand() crea un nodo por cada sucesor que devuelve este metodo asi que esto cuenta los nodos generados
+
+goal_test suma 1 y hace comprobacion original. como graph_search llama a este metodo con cada nodo que saca de la frontera, pues se pueden contar 
+los nodos visitados
+"""
+
+class GPSProblemContador(GPSProblem):
+    def __init__(self, initial, goal, graph):
+        GPSProblem.__init__(self, initial, goal, graph)
+        self.generados = 1
+        self.visitados =  0
+
+
+    def succesor(self, A):
+        sucesores = GPSProblem.successor(self, A)
+        self.generados = self.generados + len(sucesores)
+        return sucesores
+
+    def goal_test(self, state):
+        self.visitados = self.visitados + 1
+        return GPSProblem.goal_test(self, state)
+
+
