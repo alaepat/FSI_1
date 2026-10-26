@@ -544,7 +544,17 @@ class FIFOQueue(Queue):
             self.start = 0
         return e
 
+"""
+Esto es una cola como FIFOQueue con los mismos metodos
 
+ - La funcion f recibe un nodo y devuelve el valor por el que se ordena
+
+ append: mete el nodo en la lista y la ordena de menor > mayor segun f.
+ sort(key=self.f) significa que va a ordenar usando el numero que devuelve f para cada nodo
+ y pop saca el primer valor de lista que va a ser el de menor valor
+
+ en caso de un empate entre nodos, el sort simplemente los deja en el orden en que llegaron
+"""
 class PriorityQueue(Queue):
     def __init__(self, f):
         self.A = []
