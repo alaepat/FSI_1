@@ -118,6 +118,15 @@ def depth_first_graph_search(problem):
     """Search the deepest nodes in the search tree first. [p 74]"""
     return graph_search(problem, Stack())
 
+def branch_and_bound_graph_search(problem):
+    return graph_search(problem, PriorityQueue(lambda node: node.path_cost))
+
+def branch_and_bound_underestimation_graph_search(problem):
+    return graph_search(problem, PriorityQueue(lambda node: node.path_cost + problem.h(node)))
+
+def f(node):
+    return node.path_cost
+
 # _____________________________________________________________________________
 # The remainder of this file implements examples for the search algorithms.
 
