@@ -1,7 +1,7 @@
+import math
 
 #______________________________________________________________________________
 # Simple Data Structures: infinity, Dict, Struct
-import math
 
 infinity = 1.0e400
 
@@ -544,6 +544,7 @@ class FIFOQueue(Queue):
             self.start = 0
         return e
 
+
 """
 Esto es una cola como FIFOQueue con los mismos metodos
 
@@ -562,13 +563,16 @@ class PriorityQueue(Queue):
 
     def append(self, item):
         self.A.append(item)
-        self.A.sort(key=self.f)
 
     def __len__(self):
         return len(self.A)
 
     def pop(self):
-        return self.A.pop(0)
+        mejor = 0
+        for i in range(1, len(self.A)):
+            if self.f(self.A[i]) < self.f(self.A[mejor]):
+                mejor = i
+        return self.A.pop(mejor)
 
 
 ## Fig: The idea is we can define things like Fig[3,10] later.
