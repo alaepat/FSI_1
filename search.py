@@ -118,6 +118,7 @@ def depth_first_graph_search(problem):
     """Search the deepest nodes in the search tree first. [p 74]"""
     return graph_search(problem, Stack())
 
+
 def coste_acumulado(node):
     return node.path_cost
 
@@ -128,7 +129,6 @@ def branch_and_bound_underestimation_graph_search(problem):
     def coste_mas_heuristica(node):
         return node.path_cost + problem.h(node)
     return graph_search(problem, PriorityQueue(coste_mas_heuristica))
-
 
 
 # _____________________________________________________________________________
@@ -290,8 +290,7 @@ class GPSProblemContador(GPSProblem):
     def __init__(self, initial, goal, graph):
         GPSProblem.__init__(self, initial, goal, graph)
         self.generados = 1
-        self.visitados =  0
-
+        self.visitados = 0
 
     def successor(self, A):
         sucesores = GPSProblem.successor(self, A)
@@ -301,5 +300,3 @@ class GPSProblemContador(GPSProblem):
     def goal_test(self, state):
         self.visitados = self.visitados + 1
         return GPSProblem.goal_test(self, state)
-
-
