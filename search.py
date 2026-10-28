@@ -119,12 +119,14 @@ def depth_first_graph_search(problem):
     return graph_search(problem, Stack())
 
 def branch_and_bound_graph_search(problem):
-    return graph_search(problem, PriorityQueue(lambda node: node.path_cost))
+    return graph_search(problem, PriorityQueue(coste_acumulado))
 
 def branch_and_bound_underestimation_graph_search(problem):
-    return graph_search(problem, PriorityQueue(lambda node: node.path_cost + problem.h(node)))
+    def coste_mas_heuristica(node):
+        return node.path_cost + problem.h(node)
+    return graph_search(problem, PriorityQueue(coste_mas_heuristica))
 
-def f(node):
+def coste_acumulado(node):
     return node.path_cost
 
 # _____________________________________________________________________________
@@ -289,7 +291,7 @@ class GPSProblemContador(GPSProblem):
         self.visitados =  0
 
 
-    def succesor(self, A):
+    def successor(self, A):
         sucesores = GPSProblem.successor(self, A)
         self.generados = self.generados + len(sucesores)
         return sucesores
